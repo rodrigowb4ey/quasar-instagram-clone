@@ -12,10 +12,23 @@
       </q-toolbar>
     </q-header>
 
-    <q-footer elevated>
-      <q-tabs>
-        <q-tab name="mails" icon="mail" label="Mails" />
-        <q-tab name="alarms" icon="alarm" label="Alarms" />
+    <q-footer
+      class="bg-white"
+      bordered
+    >
+      <q-tabs
+        class="text-grey-10"
+        active-color="primary"
+        indicator-color="transparent"
+      >
+        <q-route-tab
+          to="/"
+          icon="eva-home-outline"
+        />
+        <q-route-tab
+          to="/camera"
+          icon="eva-camera-outline"
+        />
       </q-tabs>
       </q-footer>
 
