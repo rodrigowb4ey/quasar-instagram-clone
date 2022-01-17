@@ -4,9 +4,9 @@
       class="bg-white text-grey-10"
       bordered
     >
-      <q-toolbar>
+      <q-toolbar class="constrain">
         <q-btn
-          class="large-screen-only"
+          class="large-screen-only q-mr-sm q-mt-sm"
           flat
           round
           icon="eva-camera-outline"
@@ -14,11 +14,16 @@
           dense
           to="/camera"
         />
+        <q-separator
+          class="large-screen-only"
+          vertical
+          spaced
+        />
         <q-toolbar-title class="text-grand-hotel text-bold">
           Quasagram
         </q-toolbar-title>
         <q-btn
-          class="large-screen-only"
+          class="large-screen-only q-mr-sm q-mt-sm"
           flat
           round
           icon="eva-home-outline"
@@ -68,6 +73,9 @@ export default {
 </script>
 
 <style lang="sass">
+.q-toolbar
+  @media (min-width: $breakpoint-sm-min)
+    height: 77px
 .q-toolbar__title
   font-size: 30px
   @media (max-width: $breakpoint-xs-max)
