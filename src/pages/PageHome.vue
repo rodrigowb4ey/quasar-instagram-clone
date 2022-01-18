@@ -52,38 +52,6 @@
         </q-item>
       </div>
     </div>
-
-    <q-card
-      v-for="post in posts"
-      :key="post.id"
-      class="card-post q-mb-md"
-      flat
-      bordered>
-      <q-item>
-        <q-item-section avatar>
-          <q-avatar>
-            <img src="https://pbs.twimg.com/profile_images/1371630348556177411/H-KKwOtH_400x400.jpg">
-          </q-avatar>
-        </q-item-section>
-
-        <q-item-section>
-          <q-item-label class="text-bold">@armin_arlet</q-item-label>
-          <q-item-label caption>
-            {{ post.location }}
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-
-      <q-separator />
-
-      <q-img
-        :src="post.imageUrl"
-      />
-      <q-card-section>
-        <div class="">{{ post.caption }}</div>
-        <div class="text-caption text-grey">{{ niceDate(post.date) }}</div>
-      </q-card-section>
-    </q-card>
   </q-page>
 </template>
 
