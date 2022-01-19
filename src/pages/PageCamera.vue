@@ -49,6 +49,7 @@
           label="Location"
           class="col col-sm-6"
           dense
+          :loading="locationLoading"
         >
           <template v-slot:append>
             <q-btn
@@ -56,7 +57,9 @@
               round
               dense
               flat
-              icon="eva-navigation-2-outline" />
+              icon="eva-navigation-2-outline"
+              v-if="!locationLoading && locationSupported"
+            />
           </template>
         </q-input>
       </div>
@@ -88,7 +91,14 @@ export default{
       },
       imageCaptured: false,
       imageUpload: [],
-      hasCameraSupport: true
+      hasCameraSupport: true,
+      locationLoading: false
+    }
+  },
+  computed: {
+    locationSupported() {
+      if ('geolocation' in navigator) return true
+      return false
     }
   },
   methods: {
@@ -159,10 +169,11 @@ export default{
       return blob;
     },
     getLocation() {
+      this.locationLoading = true
       navigator.geolocation.getCurrentPosition(position => {
         this.getCityAndCountry(position)
       }, err => {
-        console.log('err: ', err)
+        this.locationError()
       }, { timeout: 7000 })
     },
     getCityAndCountry(position) {
@@ -171,7 +182,7 @@ export default{
         console.log('result: ', result)
         this.locationSucess(result)
       }).catch(err => {
-        console.log('err: ', err)
+        this.locationError()
       })
     },
     locationSucess(result) {
@@ -179,6 +190,14 @@ export default{
       if (result.data.results[0].country) {
         this.post.location += `, ${result.data.results[0].country}` 
       }
+      this.locationLoading = false
+    },
+    locationError() {
+      this.$q.dialog({
+        title: 'Error',
+        message: 'Could not find your location'
+      })
+      this.locationLoading = false
     }
   },
   mounted() {
